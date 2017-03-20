@@ -1,5 +1,6 @@
 package it.polito.tdp.libretto;
 	
+import it.polito.tdp.libretto.model.LibrettoModel;
 import javafx.application.Application;
 import javafx.stage.Stage;
 import javafx.scene.Scene;
@@ -11,7 +12,15 @@ public class Main extends Application {
 	@Override
 	public void start(Stage primaryStage) {
 		try {
-			BorderPane root = (BorderPane)FXMLLoader.load(getClass().getResource("Libretto.fxml"));
+			
+			FXMLLoader loader = new FXMLLoader(getClass().getResource("Libretto.fxml"));
+			BorderPane root = (BorderPane)loader.load();
+			
+			LibrettoController controller = loader.getController();
+			LibrettoModel model = new LibrettoModel();
+			controller.setModel(model);
+			
+			
 			Scene scene = new Scene(root);
 			scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
 			primaryStage.setScene(scene);
